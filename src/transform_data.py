@@ -50,12 +50,13 @@ def create_datafrme(path_name:str) -> pd.DataFrame:
         raise FileNotFoundError(f"Arquivo não encontrado: {path}")
 
     try:
-        with open(path_name, 'r', encoding='utf-8') as f:
+        with open(path_name, 'r') as f:
             data = json.load(f)
 
         logging.info("→ Normalizando dados JSON para DataFrame...")
         df = pd.json_normalize(data)
-        logging.info(f"\n✔ Dataframe criado com {len(df)} linhas!")
+        logging.info(f'✔ Dataframe criado com {len(df)} linhas!')
+       
         return df
 
     except IOError as e:
@@ -72,29 +73,29 @@ def normalize_weather_column(df:pd.DataFrame) -> pd.DataFrame:
         'icon':'weather_icon'
     })
 
-    df = pd.concat(df, df_weather, axis=1)
+    df = pd.concat([df, df_weather], axis=1)
 
-    logging.info(f"\n✔ Coluna 'weather' normalizada - {len(df.columns)} colunas") 
+    logging.info(f"✔ Coluna 'weather' normalizada - {len(df.columns)} colunas") 
 
     return df
 
 def drop_columns(df: pd.DataFrame, columns_name: list[str]) -> pd.DataFrame:
-    logging.info(f"\n✔ Removendo colunas: {columns_name}") 
+    logging.info(f"✔ Removendo colunas: {columns_name}") 
     df = df.drop(columns=columns_name)
-    logging.info(f"\n✔ Colunas removidas: {columns_name}") 
+    logging.info(f"✔ Colunas removidas: {columns_name}") 
     return df
 
 def rename_columns(df: pd.DataFrame, columns_name:dict[str, str]) -> pd.DataFrame:
-    logging.info(f"\n✔ Renomeado {len(columns_name)} colunas") 
+    logging.info(f"✔ Renomeado {len(columns_name)} colunas") 
     df = df.rename(columns=columns_name)
-    logging.info(f"\n✔ Colunas renomeadas")    
+    logging.info(f"✔ Colunas renomeadas")    
     return df
 
 def normalize_datetime_columns(df:pd.DataFrame, columns_name:list[str]) -> pd.DataFrame:
-    logging.info(f"\n✔ Convertendo colunas para datetime: {columns_name}")
+    logging.info(f"✔ Convertendo colunas para datetime: {columns_name}")
     for name in columns_name:
         df[name] = pd.to_datetime(df[name], unit='s', utc=True).dt.tz_convert('America/Sao_Paulo') 
-    logging.info(f"\n✔ Colunas convertidas para datetime: {len(columns_name)}")
+    logging.info(f"✔ Colunas convertidas para datetime: {len(columns_name)}")
     return df
 
 
@@ -107,6 +108,6 @@ def data_transformations():
     df = rename_columns(df, columns_names_to_rename)
     df = normalize_datetime_columns(df, columns_to_normalize_datetime)
 
-    logging.info(f"\n✔ Transformações Concluídas!")
+    logging.info(f"✔ Transformações Concluídas!")
 
     return df
