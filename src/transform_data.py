@@ -9,6 +9,37 @@ path_name = Path(__file__).parent.parent / 'data' / 'weather_data.json'
 
 columns_name_to_drop = ['weather', 'weather_icon', 'sys.type']
 
+columns_names_to_rename = {
+    "base": "base",
+    "visibility": "visibility",
+    "dt": "datetime",
+    "timezone": "timezone",
+    "id": "city_id",
+    "name": "city_name",
+    "cod": "code",
+    "coord.lon": "longitude",
+    "coord.lat": "latitude",
+    "main.temp": "temperature",
+    "main.feels_like": "feels_like",
+    "main.temp_min": "temp_min",
+    "main.temp_max": "temp_max",
+    "main.pressure": "pressure",
+    "main.humidity": "humidity",
+    "main.sea_level": "sea_level",
+    "main.grnd_level": "grnd_level",
+    "wind.speed": "wind_speed",
+    "wind.deg": "wind_deg",
+    "wind.gust": "wind_gust",
+    "clouds.all": "clouds",
+    "sys.type": "sys_type",
+    "sys.id": "sys_id",
+    "sys.country": "country",
+    "sys.sunrise": "sunrise",
+    "sys.sunset": "sunset"
+    # weather_id, weather_main, weather_description -> estão no dataframe, mas não vai ser necessário renomear.
+}
+
+
 def create_datafrme(path_name:str) -> pd.DataFrame:
     logging.info("→ Criando Dataframe do arquivo JSON...")
 
@@ -54,6 +85,8 @@ def drop_columns(df: pd.DataFrame, columns_name: list[str]) -> pd.DataFrame:
     return df
 
 
-def rename_columns():
-
+def rename_columns(df: pd.DataFrame, columns_name:dict[str, str]) -> pd.DataFrame:
+    logging.info(f"\n✔ Renomeado {len(columns_name)} colunas") 
+    df = df.rename(columns=columns_name)
+    logging.info(f"\n✔ Colunas renomeadas")    
     return pd.DataFrame
