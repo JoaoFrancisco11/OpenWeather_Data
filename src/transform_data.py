@@ -5,7 +5,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-path_name = Path(__file__).parent.parent / 'data' / 'weather_data.json'
+path_name = Path(__file__).resolve().parent.parent / 'data' / 'weather_data.json'
 
 columns_name_to_drop = ['weather', 'weather_icon', 'sys.type']
 
