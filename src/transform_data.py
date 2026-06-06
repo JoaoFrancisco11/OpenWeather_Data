@@ -39,6 +39,7 @@ columns_names_to_rename = {
     # weather_id, weather_main, weather_description -> estão no dataframe, mas não vai ser necessário renomear.
 }
 
+columns_to_normalize_datetime=['datetime','sunrise','sunset']
 
 def create_datafrme(path_name:str) -> pd.DataFrame:
     logging.info("→ Criando Dataframe do arquivo JSON...")
@@ -94,4 +95,18 @@ def normalize_datetime_columns(df:pd.DataFrame, columns_name:list[str]) -> pd.Da
     for name in columns_name:
         df[name] = pd.to_datetime(df[name], unit='s', utc=True).dt.tz_convert('America/Sao_Paulo') 
     logging.info(f"\n✔ Colunas convertidas para datetime: {len(columns_name)}")
+    return df
+
+
+def data_transformations():
+    print('\n Iniciando as transformações')
+
+    df = create_datafrme(path_name)
+    df = normalize_weather_column(df)
+    df = drop_columns(df, columns_name_to_drop)
+    df = rename_columns(df, columns_names_to_rename)
+    df = normalize_datetime_columns(df, columns_to_normalize_datetime)
+
+    logging.info(f"\n✔ Transformações Concluídas!")
+
     return df
