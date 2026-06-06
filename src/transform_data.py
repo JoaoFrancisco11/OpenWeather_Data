@@ -7,6 +7,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 path_name = Path(__file__).parent.parent / 'data' / 'weather_data.json'
 
+columns_name_to_drop = ['weather', 'weather_icon', 'sys.type']
+
 def create_datafrme(path_name:str) -> pd.DataFrame:
     logging.info("→ Criando Dataframe do arquivo JSON...")
 
@@ -45,8 +47,13 @@ def normalize_weather_column(df:pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def drop_columns():
-    return pd.DataFrame
+def drop_columns(df: pd.DataFrame, columns_name: list[str]) -> pd.DataFrame:
+    logging.info(f"\n✔ Removendo colunas: {columns_name}") 
+    df = df.drop(columns=columns_name)
+    logging.info(f"\n✔ Colunas removidas: {columns_name}") 
+    return df
+
 
 def rename_columns():
+
     return pd.DataFrame
