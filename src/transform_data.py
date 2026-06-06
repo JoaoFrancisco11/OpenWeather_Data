@@ -77,16 +77,21 @@ def normalize_weather_column(df:pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-
 def drop_columns(df: pd.DataFrame, columns_name: list[str]) -> pd.DataFrame:
     logging.info(f"\n✔ Removendo colunas: {columns_name}") 
     df = df.drop(columns=columns_name)
     logging.info(f"\n✔ Colunas removidas: {columns_name}") 
     return df
 
-
 def rename_columns(df: pd.DataFrame, columns_name:dict[str, str]) -> pd.DataFrame:
     logging.info(f"\n✔ Renomeado {len(columns_name)} colunas") 
     df = df.rename(columns=columns_name)
     logging.info(f"\n✔ Colunas renomeadas")    
-    return pd.DataFrame
+    return df
+
+def normalize_datetime_columns(df:pd.DataFrame, columns_name:list[str]) -> pd.DataFrame:
+    logging.info(f"\n✔ Convertendo colunas para datetime: {columns_name}")
+    for name in columns_name:
+        df[name] = pd.to_datetime(df[name], unit='s', utc=True).dt.tz_convert('America/Sao_Paulo') 
+    logging.info(f"\n✔ Colunas convertidas para datetime: {len(columns_name)}")
+    return df
