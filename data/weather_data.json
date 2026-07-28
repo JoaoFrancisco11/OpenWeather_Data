@@ -8,36 +8,36 @@
             "id": 800,
             "main": "Clear",
             "description": "clear sky",
-            "icon": "01d"
+            "icon": "01n"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 21.74,
-        "feels_like": 21.3,
-        "temp_min": 20.06,
-        "temp_max": 22.47,
-        "pressure": 1018,
-        "humidity": 51,
-        "sea_level": 1018,
-        "grnd_level": 927
+        "temp": 19.23,
+        "feels_like": 19.25,
+        "temp_min": 18.41,
+        "temp_max": 19.69,
+        "pressure": 1019,
+        "humidity": 78,
+        "sea_level": 1019,
+        "grnd_level": 928
     },
     "visibility": 10000,
     "wind": {
-        "speed": 1.79,
-        "deg": 308,
-        "gust": 2.24
+        "speed": 0.98,
+        "deg": 332,
+        "gust": 0.97
     },
     "clouds": {
         "all": 0
     },
-    "dt": 1780773391,
+    "dt": 1785208541,
     "sys": {
         "type": 2,
-        "id": 2082654,
+        "id": 2033898,
         "country": "BR",
-        "sunrise": 1780738998,
-        "sunset": 1780777645
+        "sunrise": 1785231811,
+        "sunset": 1785271340
     },
     "timezone": -10800,
     "id": 3448439,
